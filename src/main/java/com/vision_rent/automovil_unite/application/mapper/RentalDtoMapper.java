@@ -11,10 +11,8 @@ import org.mapstruct.factory.Mappers;
 /**
  * Mapper para convertir entre Rental (dominio) y RentalDto (aplicación).
  */
-@Mapper(uses = {VehicleDtoMapper.class, UserDtoMapper.class})
+@Mapper(componentModel = "spring", uses = {VehicleDtoMapper.class, UserDtoMapper.class})
 public interface RentalDtoMapper {
-    
-    RentalDtoMapper INSTANCE = Mappers.getMapper(RentalDtoMapper.class);
     
     RentalDto toDto(Rental rental);
     

@@ -156,4 +156,11 @@ public class UserController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseEntity.ok(userService.hasRequiredDocuments(userDetails.getUserId()));
     }
+
+    @PutMapping("/users/{id}/verify-email")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> verifyUserEmail(@PathVariable Long id) {
+        userService.verifyUserEmail(id);
+        return ResponseEntity.ok().build();
+    }
 }

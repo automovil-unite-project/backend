@@ -27,8 +27,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserDomainService userDomainService;
     private final FileStorageService fileStorageService;
-    private final UserDtoMapper userDtoMapper = UserDtoMapper.INSTANCE;
-    
+    private final UserDtoMapper userDtoMapper;
+
     /**
      * Obtiene un usuario por su ID.
      *
@@ -41,6 +41,14 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", userId));
         
         return userDtoMapper.toDto(user);
+    }
+
+    @Transactional
+    public void verifyUserEmail(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", userId));
+        user.setEmailVerified(true);
+        userRepository.save(user);
     }
     
     /**

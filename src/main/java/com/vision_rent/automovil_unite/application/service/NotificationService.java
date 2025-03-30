@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Servicio para la gestión de notificaciones.
  */
 @Service
-@RequiredArgsConstructor
+
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
@@ -31,7 +31,23 @@ public class NotificationService {
     private final RentalRepository rentalRepository;
     private final NotificationDomainService notificationDomainService;
     private final NotificationDtoMapper notificationDtoMapper;
-    
+    private final NotificationWebSocketService webSocketService;
+
+
+    public NotificationService(NotificationRepository notificationRepository,
+                               UserRepository userRepository,
+                               RentalRepository rentalRepository,
+                               NotificationDomainService notificationDomainService,
+                               NotificationDtoMapper notificationDtoMapper,
+                               NotificationWebSocketService webSocketService) {
+        this.notificationRepository = notificationRepository;
+        this.userRepository = userRepository;
+        this.rentalRepository = rentalRepository;
+        this.notificationDomainService = notificationDomainService;
+        this.notificationDtoMapper = notificationDtoMapper;
+        this.webSocketService = webSocketService;
+    }
+
     /**
      * Obtiene todas las notificaciones de un usuario.
      *
@@ -110,12 +126,20 @@ public class NotificationService {
         // Notificar al arrendatario
         User renter = rental.getRenter();
         Notification renterNotification = notificationDomainService.createRentalCreatedNotification(rental, renter);
-        notificationRepository.save(renterNotification);
-        
+        renterNotification = notificationRepository.save(renterNotification);
+
+        // Enviar notificación en tiempo real al arrendatario
+        NotificationDto renterNotificationDto = notificationDtoMapper.toDto(renterNotification);
+        webSocketService.sendNotificationToUser(renter.getId(), renterNotificationDto);
+
         // Notificar al propietario
         User owner = rental.getVehicle().getOwner();
         Notification ownerNotification = notificationDomainService.createRentalCreatedNotification(rental, owner);
-        notificationRepository.save(ownerNotification);
+        ownerNotification = notificationRepository.save(ownerNotification);
+
+        // Enviar notificación en tiempo real al propietario
+        NotificationDto ownerNotificationDto = notificationDtoMapper.toDto(ownerNotification);
+        webSocketService.sendNotificationToUser(owner.getId(), ownerNotificationDto);
     }
     
     /**
@@ -131,13 +155,21 @@ public class NotificationService {
         User renter = userRepository.findById(renterId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", renterId));
         Notification renterNotification = notificationDomainService.createPaymentReceivedNotification(payment, renter);
-        notificationRepository.save(renterNotification);
-        
+        renterNotification = notificationRepository.save(renterNotification);
+
+        // Enviar notificación en tiempo real al arrendatario
+        NotificationDto renterNotificationDto = notificationDtoMapper.toDto(renterNotification);
+        webSocketService.sendNotificationToUser(renterId, renterNotificationDto);
+
         // Notificar al propietario
         User owner = userRepository.findById(ownerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", ownerId));
         Notification ownerNotification = notificationDomainService.createPaymentReceivedNotification(payment, owner);
-        notificationRepository.save(ownerNotification);
+        ownerNotification = notificationRepository.save(ownerNotification);
+
+        // Enviar notificación en tiempo real al propietario
+        NotificationDto ownerNotificationDto = notificationDtoMapper.toDto(ownerNotification);
+        webSocketService.sendNotificationToUser(ownerId, ownerNotificationDto);
     }
     
     /**
@@ -203,4 +235,6 @@ public class NotificationService {
         Notification renterNotification = notificationDomainService.createReceiptGeneratedNotification(receipt, renter);
         notificationRepository.save(renterNotification);
     }
+
+
 }

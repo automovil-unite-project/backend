@@ -33,8 +33,8 @@ public class VehicleService {
     private final UserRepository userRepository;
     private final UserDomainService userDomainService;
     private final FileStorageService fileStorageService;
-    private final VehicleDtoMapper vehicleDtoMapper = VehicleDtoMapper.INSTANCE;
-    private final UserDtoMapper userDtoMapper = UserDtoMapper.INSTANCE;
+    private final VehicleDtoMapper vehicleDtoMapper;
+    private final UserDtoMapper userDtoMapper;
 
     /**
      * Crea un nuevo vehículo.
@@ -58,6 +58,15 @@ public class VehicleService {
 
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
         return vehicleDtoMapper.toDto(savedVehicle);
+    }
+
+
+    @Transactional
+    public void verifyUserEmail(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", userId));
+        user.setEmailVerified(true);
+        userRepository.save(user);
     }
 
     /**

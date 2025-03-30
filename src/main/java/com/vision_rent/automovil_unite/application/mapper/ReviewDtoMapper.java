@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * Mapper para convertir entre Review (dominio) y ReviewDto (aplicación).
  */
-@Mapper(uses = {RentalDtoMapper.class, UserDtoMapper.class, VehicleDtoMapper.class})
+@Mapper(componentModel = "spring",uses = {RentalDtoMapper.class, UserDtoMapper.class, VehicleDtoMapper.class})
 public interface ReviewDtoMapper {
     
     ReviewDtoMapper INSTANCE = Mappers.getMapper(ReviewDtoMapper.class);

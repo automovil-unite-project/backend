@@ -13,9 +13,7 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper(componentModel = "spring", uses = {UserDtoMapper.class})
 public interface VehicleDtoMapper {
-    
-    VehicleDtoMapper INSTANCE = Mappers.getMapper(VehicleDtoMapper.class);
-    
+
     VehicleDto toDto(Vehicle vehicle);
     
     @Mapping(target = "id", ignore = true)
@@ -30,4 +28,5 @@ public interface VehicleDtoMapper {
     Vehicle toEntity(CreateVehicleRequest createVehicleRequest);
     
     Vehicle toEntity(VehicleDto vehicleDto);
+
 }

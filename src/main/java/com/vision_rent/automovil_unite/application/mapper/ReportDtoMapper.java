@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * Mapper para convertir entre Report (dominio) y ReportDto (aplicación).
  */
-@Mapper(uses = {RentalDtoMapper.class, UserDtoMapper.class})
+@Mapper(componentModel = "spring", uses = {RentalDtoMapper.class, UserDtoMapper.class})
 public interface ReportDtoMapper {
     
     ReportDtoMapper INSTANCE = Mappers.getMapper(ReportDtoMapper.class);

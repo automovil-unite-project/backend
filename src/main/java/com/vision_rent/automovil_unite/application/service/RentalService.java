@@ -40,7 +40,7 @@ public class RentalService {
     private final VehicleRepository vehicleRepository;
     private final RentalDomainService rentalDomainService;
     private final UserDomainService userDomainService;
-    private final RentalDtoMapper rentalDtoMapper = RentalDtoMapper.INSTANCE;
+    private final RentalDtoMapper rentalDtoMapper;
     
     /**
      * Crea un nuevo alquiler.

@@ -32,7 +32,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final UserDtoMapper userDtoMapper = UserDtoMapper.INSTANCE;
+    private final UserDtoMapper userDtoMapper;
     
     /**
      * Registra un nuevo usuario en el sistema.
