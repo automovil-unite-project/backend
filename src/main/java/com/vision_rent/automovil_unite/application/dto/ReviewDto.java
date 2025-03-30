@@ -1,0 +1,27 @@
+package com.vision_rent.automovil_unite.application.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+/**
+ * DTO para transferir datos de reseña entre capas.
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReviewDto {
+    private Long id;
+    private Long rentalId;
+    private UserDto reviewer;
+    private UserDto reviewed;
+    private VehicleDto vehicle;
+    private Float rating;
+    private String comment;
+    private String type;
+    private LocalDateTime createdAt;
+}
