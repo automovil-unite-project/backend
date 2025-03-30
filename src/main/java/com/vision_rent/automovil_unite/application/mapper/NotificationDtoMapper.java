@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * Mapper para convertir entre Notification (dominio) y NotificationDto (aplicación).
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserDtoMapper.class})
 public interface NotificationDtoMapper {
     
     NotificationDtoMapper INSTANCE = Mappers.getMapper(NotificationDtoMapper.class);

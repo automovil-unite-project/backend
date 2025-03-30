@@ -4,6 +4,7 @@ import com.vision_rent.automovil_unite.application.dto.PaymentDto;
 import com.vision_rent.automovil_unite.application.dto.ProcessPaymentRequest;
 import com.vision_rent.automovil_unite.application.service.PaymentService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/payments")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class PaymentController {
 
     private final PaymentService paymentService;

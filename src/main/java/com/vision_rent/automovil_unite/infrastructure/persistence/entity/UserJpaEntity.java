@@ -48,7 +48,7 @@ public class UserJpaEntity extends BaseJpaEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    @Builder.Default
+
     private Set<Role> roles = new HashSet<>();
 
     @Column(name = "profile_photo_url")
@@ -71,4 +71,5 @@ public class UserJpaEntity extends BaseJpaEntity {
 
     @Column(name = "report_count")
     private int reportCount;
+
 }

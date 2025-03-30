@@ -3,6 +3,7 @@ package com.vision_rent.automovil_unite.presentation.controller;
 import com.vision_rent.automovil_unite.application.dto.NotificationDto;
 import com.vision_rent.automovil_unite.application.service.NotificationService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/notifications")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class NotificationController {
 
     private final NotificationService notificationService;

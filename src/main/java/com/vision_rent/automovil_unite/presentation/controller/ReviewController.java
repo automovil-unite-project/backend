@@ -5,6 +5,7 @@ import com.vision_rent.automovil_unite.application.dto.CreateReviewRequest;
 import com.vision_rent.automovil_unite.application.dto.ReviewDto;
 import com.vision_rent.automovil_unite.application.service.ReviewService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/reviews")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class ReviewController {
 
     private final ReviewService reviewService;

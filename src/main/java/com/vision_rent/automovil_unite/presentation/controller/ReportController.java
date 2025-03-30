@@ -5,6 +5,7 @@ import com.vision_rent.automovil_unite.application.dto.CreateReportRequest;
 import com.vision_rent.automovil_unite.application.dto.ReportDto;
 import com.vision_rent.automovil_unite.application.service.ReportService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/reports")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class ReportController {
 
     private final ReportService reportService;

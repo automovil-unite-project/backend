@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 
 /**
@@ -40,7 +39,7 @@ public class NotificationJpaEntity extends BaseJpaEntity {
     @Column(name = "related_entity_id")
     private Long relatedEntityId;
 
-    @Column(nullable = false)
+    @Column(name = "is_read", nullable = false)
     private Boolean read;
 
     @Column(name = "read_at")

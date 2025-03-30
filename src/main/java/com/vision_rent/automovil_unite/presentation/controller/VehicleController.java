@@ -5,6 +5,7 @@ import com.vision_rent.automovil_unite.application.dto.CreateVehicleRequest;
 import com.vision_rent.automovil_unite.application.dto.VehicleDto;
 import com.vision_rent.automovil_unite.application.service.VehicleService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,6 +34,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/vehicles")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class VehicleController {
 
     private final VehicleService vehicleService;

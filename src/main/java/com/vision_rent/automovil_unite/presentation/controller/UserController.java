@@ -4,6 +4,7 @@ package com.vision_rent.automovil_unite.presentation.controller;
 import com.vision_rent.automovil_unite.application.dto.UserDto;
 import com.vision_rent.automovil_unite.application.service.UserService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     private final UserService userService;

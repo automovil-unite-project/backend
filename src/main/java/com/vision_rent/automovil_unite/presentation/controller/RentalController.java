@@ -7,6 +7,7 @@ import com.vision_rent.automovil_unite.application.dto.RentalDto;
 import com.vision_rent.automovil_unite.application.dto.ReturnVehicleRequest;
 import com.vision_rent.automovil_unite.application.service.RentalService;
 import com.vision_rent.automovil_unite.infrastructure.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/rentals")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class RentalController {
 
     private final RentalService rentalService;

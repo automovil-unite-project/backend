@@ -6,6 +6,7 @@ import com.vision_rent.automovil_unite.application.dto.AuthenticationResponse;
 import com.vision_rent.automovil_unite.application.dto.RegisterRequest;
 import com.vision_rent.automovil_unite.application.dto.ResetPasswordRequest;
 import com.vision_rent.automovil_unite.application.service.AuthService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
